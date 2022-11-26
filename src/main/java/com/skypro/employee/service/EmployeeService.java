@@ -4,10 +4,8 @@ import com.skypro.employee.model.Employee;
 import com.skypro.employee.record.EmployeeReqest;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.OptionalInt;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class EmployeeService {
@@ -24,21 +22,23 @@ public class EmployeeService {
         Employee employee = new Employee(employeeReqest.getLastName(),
                 employeeReqest.getFirstName(),
                 employeeReqest.getDepartment(),
-                employeeReqest.getSalary());
+                employeeReqest.getSalary(),
+                employeeReqest.getAvgGrade());
         this.employees.put(employee.getId(), employee);
         return employee;
     }
     public int getSalarySum(){
         return employees.values().stream().mapToInt(e->e.getSalary()).sum();
     }
-    public OptionalInt findMinSalary() {
-        return employees.values().stream().mapToInt(e->e.getSalary()).min();
+    public Employee findMinSalary() {
+        return employees.values().stream().min(Comparator.comparing(e->e.getSalary())).orElseThrow(IllegalArgumentException::new);
     }
-    public OptionalInt findMaxSalary(){
-        return employees.values().stream().mapToInt(e->e.getSalary()).max();
+    public Employee findMaxSalary(){
+        return employees.values().stream().max(Comparator.comparing(e->e.getSalary())).orElseThrow(IllegalArgumentException::new);
     }
-    public java.util.OptionalDouble findAverageSalary(){
-        return employees.values().stream().mapToInt(e->e.getSalary()).average();
+    public List<Employee> findAverageSalary(){
+        return employees.values().stream().filter(e->e.getSalary() > 2000 && e.getAvgGrade() < 1500).collect(Collectors.toList());
     }
+
 }
 

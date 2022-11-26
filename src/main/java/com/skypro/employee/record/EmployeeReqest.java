@@ -5,6 +5,15 @@ public class EmployeeReqest {
     private String lastName;
     private int department;
     private int salary;
+    private double avgGrade;
+
+    public double getAvgGrade() {
+        return avgGrade;
+    }
+
+    public void setAvgGrade(double avgGrade) {
+        this.avgGrade = avgGrade;
+    }
 
     public String getFirstName() {
         return firstName;

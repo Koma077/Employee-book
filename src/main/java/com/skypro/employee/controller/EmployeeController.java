@@ -9,8 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collection;
-import java.util.OptionalDouble;
-import java.util.OptionalInt;
+import java.util.List;
 
 @RestController
 public class EmployeeController {
@@ -33,16 +32,15 @@ public class EmployeeController {
         return this.employeeService.getSalarySum();
     }
     @GetMapping("/employees/salary/min")
-    public OptionalInt findMinSalary(){
+    public Employee findMinSalary(){
         return this.employeeService.findMinSalary();
     }
     @GetMapping("/employees/salary/max")
-    public OptionalInt findMaxSalary(){
+    public Employee findMaxSalary(){
         return this.employeeService.findMaxSalary();
     }
     @GetMapping("/employees/high-salary")
-    public OptionalDouble findAverageSalary(){
+    public List<Employee> findAverageSalary(){
         return this.employeeService.findAverageSalary();
     }
-    //
 }

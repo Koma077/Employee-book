@@ -7,13 +7,19 @@ public class Employee {
     public final String lastName;
     private final int department;
     private final int salary;
+    private final double avgGrade;
 
-    public Employee(String firstName, String lastName, int department, int salary) {
+    public Employee(String firstName, String lastName, int department, int salary, double avgGrade) {
+        this.avgGrade = avgGrade;
         this.id = counter++;
         this.firstName = firstName;
         this.lastName = lastName;
         this.department = department;
         this.salary = salary;
+    }
+
+    public double getAvgGrade() {
+        return avgGrade;
     }
 
     public int getId() {
